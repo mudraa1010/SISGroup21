@@ -1,6 +1,7 @@
 # UI Pages
 
-This directory contains the main pages and screens of the Omada Contacts app.
+This directory contains the main pages and screens of the Omada Contacts app
+
 
 ## Main Pages
 
