@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:omada/core/supabase/supabase_instance.dart';
-import 'package:omada/ui/widgets/app_bottom_nav.dart';
 import 'package:omada/ui/widgets/app_scaffold.dart';
 import 'package:omada/ui/widgets/app_card.dart';
 import 'package:omada/core/theme/design_tokens.dart';

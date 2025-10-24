@@ -8,9 +8,12 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // Match the semi-opaque white, rounded and bordered look used for
+      // the channels container and the contacts search box.
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.16),
-        borderRadius: BorderRadius.circular(16),
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.3)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       child: Text(

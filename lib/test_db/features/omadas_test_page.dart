@@ -94,29 +94,7 @@ class _OmadasTestPageState extends State<OmadasTestPage> {
     }
   }
 
-  Future<void> _updateOmada(OmadaModel omada) async {
-    if (_nameCtrl.text.trim().isEmpty) {
-      setState(() => _status = 'Name is required');
-      return;
-    }
-
-    try {
-      await _omadaService.updateOmada(
-        omada.id,
-        name: _nameCtrl.text.trim(),
-        description: _descCtrl.text.trim().isEmpty
-            ? null
-            : _descCtrl.text.trim(),
-        color: _colorCtrl.text.trim().isEmpty ? null : _colorCtrl.text.trim(),
-      );
-
-      _clearInputs();
-      await _loadData();
-      setState(() => _status = 'Omada updated successfully');
-    } catch (e) {
-      setState(() => _status = 'Error updating: $e');
-    }
-  }
+  // _updateOmada helper removed because it's not referenced by the test UI.
 
   Future<void> _deleteOmada(OmadaModel omada) async {
     try {

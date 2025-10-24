@@ -151,10 +151,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return _controller.getTagsForContacts(_visibleContacts);
   }
 
-  Future<Map<String, List<ContactChannelModel>>>
-  _getChannelsForVisibleContacts() async {
-    return _controller.getChannelsForContacts(_visibleContacts);
-  }
+  // channels for visible contacts not currently used; keeping tags only.
 
   Future<void> _onAddContact() async {
     final created = await Navigator.of(

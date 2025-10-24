@@ -170,20 +170,31 @@ class _ProfileManagementPageState extends State<ProfileManagementPage> {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: OmadaTokens.space16,
                                 ),
-                                child: ChannelGrid(
-                                  colorPill: colorPill,
-                                  colorPillActive: colorPillActive,
-                                  colorText: colorText,
-                                  channels: data.channels,
-                                  selectedIds: _selectedChannelIds,
-                                  onOpen: (id) {
-                                    final ch = data.channels.firstWhere(
-                                      (c) => c.id == id,
-                                    );
-                                    _launcher.openChannel(context, ch);
-                                  },
-                                  onLongPress: (id) =>
-                                      _onChannelLongPress(context, data, id),
+                                // Match the search box styling used on Contacts screen
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(0.3),
+                                    ),
+                                  ),
+                                  child: ChannelGrid(
+                                    colorPill: colorPill,
+                                    colorPillActive: colorPillActive,
+                                    colorText: colorText,
+                                    channels: data.channels,
+                                    selectedIds: _selectedChannelIds,
+                                    onOpen: (id) {
+                                      final ch = data.channels.firstWhere(
+                                        (c) => c.id == id,
+                                      );
+                                      _launcher.openChannel(context, ch);
+                                    },
+                                    onLongPress: (id) =>
+                                        _onChannelLongPress(context, data, id),
+                                  ),
                                 ),
                               ),
 

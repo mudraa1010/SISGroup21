@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:omada/core/data/models/contact_model.dart';
 import 'package:omada/core/data/models/tag_model.dart';
-import 'package:omada/core/domain/models/tag.dart';
-import 'package:intl/intl.dart';
-import 'package:omada/core/theme/app_theme.dart';
-import 'package:omada/core/theme/color_palette.dart';
+// Removed unused imports (domain tag, intl, app theme, color palette)
 import 'package:omada/ui/pages/contact_screen/contact_tag.dart';
 
 class ContactCard extends StatefulWidget {
@@ -55,11 +52,9 @@ class ContactCardState extends State<ContactCard>
 
   @override
   Widget build(BuildContext context) {
-    final appPalette = Theme.of(context).extension<AppPaletteTheme>();
-
-    // final lastContactFormatted = DateFormat(
-    //   "MMM d, hh:mm a",
-    // ).format(widget.lastContact);
+  // final lastContactFormatted = DateFormat(
+  //   "MMM d, hh:mm a",
+  // ).format(widget.lastContact);
 
     return AnimatedSize(
       duration: const Duration(milliseconds: 300),

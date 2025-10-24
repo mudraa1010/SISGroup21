@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:omada/core/controllers/contacts_controller.dart';
 import 'package:omada/core/controllers/favourites_controller.dart';
-import 'package:omada/core/data/models/contact_channel_model.dart';
 import 'package:omada/core/data/models/contact_model.dart';
 import 'package:omada/core/data/models/tag_model.dart';
-import 'package:omada/core/domain/models/tag.dart';
 import 'package:omada/core/supabase/supabase_instance.dart';
 import 'package:omada/core/theme/color_palette.dart';
 import 'package:omada/ui/pages/account_page.dart';
@@ -17,7 +15,7 @@ import 'package:omada/ui/pages/contacts/user_discovery_sheet.dart';
 import 'package:omada/ui/pages/deleted_contacts_page.dart';
 import 'package:omada/ui/pages/manage_tags_page.dart';
 import 'package:omada/ui/widgets/app_bottom_nav.dart';
-import 'package:omada/ui/widgets/contact_tile.dart';
+// removed unused imports: contact_channel_model, contact_tile
 import 'package:omada/ui/widgets/filter_row.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -150,10 +148,7 @@ class _ContactScreenState extends State<ContactScreen> {
     return _controller.getTagsForContacts(_visibleContacts);
   }
 
-  Future<Map<String, List<ContactChannelModel>>>
-  _getChannelsForVisibleContacts() async {
-    return _controller.getChannelsForContacts(_visibleContacts);
-  }
+  // channels for visible contacts are not used here; helper removed.
 
   Future<void> _onAddContact() async {
     final created = await Navigator.of(
@@ -231,10 +226,7 @@ class _ContactScreenState extends State<ContactScreen> {
               builder: (context, constraints) {
                 final double currentHeight = constraints.biggest.height;
 
-                final double t =
-                    ((currentHeight - collapsedHeight) /
-                            (expandedHeight - collapsedHeight))
-                        .clamp(0.0, 1.0);
+        // animation factor removed (unused)
                 // print("reported t: $t");
                 // print("current height: $currentHeight");
                 // print("min height: $minHeight");
@@ -426,74 +418,9 @@ class _ContactScreenState extends State<ContactScreen> {
 
   // THE OTHER STUFF
 
-  Widget _buildBody() {
-    if (_isLoading && _visibleContacts.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    if (_error != null) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.error_outline, size: 48),
-              const SizedBox(height: 8),
-              Text(_error!, textAlign: TextAlign.center),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _refreshContacts,
-                child: const Text('Retry'),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-    if (_visibleContacts.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: Column(
-          children: const [
-            Icon(Icons.contact_page_outlined, size: 72, color: Colors.grey),
-            SizedBox(height: 12),
-            Text('No contacts yet'),
-            SizedBox(height: 4),
-            Text('Tap + to add your first contact'),
-          ],
-        ),
-      );
-    }
-    return FutureBuilder<Map<String, List<TagModel>>>(
-      future: _getTagsForVisibleContacts(),
-      builder: (context, snapshot) {
-        final tagsByContact = snapshot.data ?? const {};
-        return Column(
-          children: _visibleContacts.map((contact) {
-            return ContactTile(
-              contact: contact,
-              tags: tagsByContact[contact.id] ?? const [],
-              isFavourite: _favouritesController.isFavourite(contact.id),
-              onFavouriteToggle: () => _toggleFavourite(contact.id),
-              onTagTap: (tag) async {
-                setState(() {
-                  if (_selectedTagIds.contains(tag.id)) {
-                    _selectedTagIds.remove(tag.id);
-                  } else {
-                    _selectedTagIds.add(tag.id);
-                  }
-                });
-                await _refreshContacts();
-              },
-              onTap: () => _onEditContact(contact),
-              onEdit: () => _onEditContact(contact),
-              onDelete: () => _onDeleteContact(contact),
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
+  // _buildBody is not used by this screen; kept legacy code removed to
+  // satisfy analyzer. The SliverList/SliverChildBuilderDelegate handles
+  // contact rendering above.
 
   Future<void> _openManageTagsSheet() async {
     await _refreshTags();

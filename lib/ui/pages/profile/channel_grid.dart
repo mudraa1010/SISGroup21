@@ -80,10 +80,21 @@ class ChannelGrid extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  ch.icon,
-                  color: isPrimary ? const Color(0xFF0b1729) : colorText,
-                  size: 22,
+                // Opaque circular icon matching the profile/search styling.
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.92),
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    ch.icon,
+                    // Use a darker icon for primary, otherwise the app color pill.
+                    color: isPrimary ? const Color(0xFF0b1729) : colorPill,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Text(
